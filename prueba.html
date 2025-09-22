@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo con Estilo Global</title>
+  <link rel="stylesheet" href="/estilo.css">
+  <!-- Fuente bonita (opcional) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div class="container">
+    <h1>🌌 Demo de Estilo Global</h1>
+    <p>Este es un ejemplo de cómo se ven los elementos con <code>style.css</code>.</p>
+
+    <h2>Formulario</h2>
+    <form>
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" placeholder="Escribí tu nombre">
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="tucorreo@mail.com">
+
+      <label for="mensaje">Mensaje</label>
+      <textarea id="mensaje" rows="3" placeholder="Escribí tu mensaje..."></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+
+    <h2>Layout en Dos Columnas</h2>
+    <div class="grid two-col">
+      <div>
+        <h3>Columna A</h3>
+        <p>Contenido de la columna izquierda. Puede ser texto, imágenes, canvas, etc.</p>
+      </div>
+      <div>
+        <h3>Columna B</h3>
+        <p>Contenido de la columna derecha. Acá podrías poner resultados, gráficos, etc.</p>
+      </div>
+    </div>
+
+    <h2>Ejemplo con Flexbox</h2>
+    <div class="flex">
+      <div style="flex:1; background:#f9fafb; padding:10px; border-radius:var(--radius);">
+        <h3>Bloque 1</h3>
+        <p>Texto dentro de un bloque flexible.</p>
+      </div>
+      <div style="flex:1; background:#f9fafb; padding:10px; border-radius:var(--radius);">
+        <h3>Bloque 2</h3>
+        <p>Otro bloque, comparte espacio automáticamente.</p>
+      </div>
+    </div>
+
+    <h2>Canvas de Ejemplo</h2>
+    <canvas width="200" height="200"></canvas>
+  </div>
+
+</body>
+</html>
