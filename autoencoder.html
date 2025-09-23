@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Decodificación de Espacio Latente</title>
+<link rel="stylesheet" href="estilo_autoencoder.css">
+</head>
+<body>
+  <header id="encabezado">
+    <nav id="nav">
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./autoencoder.html">Autoencoder</a></li>
+        <li><a href="./red_multicapa.html">Multicapa</a></li>
+        <li><a href="./red_simple.html">Simple</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div id="container">
+    <h1>Decodificación de Espacio Latente</h1>
+    <p>
+      Seleccioná un punto en el gráfico o movete libremente para visualizar cómo se reconstruye la imagen.
+    </p>
+
+    <div id="main">
+      <div id="plot"></div>
+      <div id="controls">
+        <div>
+          X: <input type="number" id="inputX" step="0.01" value="0"><br>
+          Y: <input type="number" id="inputY" step="0.01" value="0"><br>
+          <button id="showBtn">Mostrar Imagen</button>
+          <button id="toggleMoveBtn">🔄 Modo mover: OFF</button>
+        </div>
+        <h3>Imagen Reconstruida</h3>
+        <canvas id="outputCanvas" width="1500" height="1500"></canvas>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js"></script>
+
+<script>
+let latentData = [];
+let decoder;
+const imgWidth = 64, imgHeight = 64;
+
+const outputCanvas = document.getElementById('outputCanvas');
+const inputX = document.getElementById('inputX');
+const inputY = document.getElementById('inputY');
+const showBtn = document.getElementById('showBtn');
+const toggleMoveBtn = document.getElementById('toggleMoveBtn');
+let moveMode = false;
+
+// archivos JSON
+const latentFile = "latent_representations.json";
+const imageFile = "image_filenames.json";
+const decoderParts = [
+  "decoder_parts/decoder_part1.json",
+  "decoder_parts/decoder_part2.json",
+  "decoder_parts/decoder_part3.json"
+  // agregar todos los fragmentos
+];
+
+// cargar todo
+Promise.all([
+  fetch(latentFile).then(r=>r.json()),
+  fetch(imageFile).then(r=>r.json()),
+  Promise.all(decoderParts.map(f => fetch(f).then(r=>r.json())))
+])
+.then(([latData, imgData, decParts]) => {
+  // reconstruir decoder_weights completo
+  let decoder_weights = [];
+  decParts.forEach(p => decoder_weights = decoder_weights.concat(p));
+
+  const data = {
+    latent_representations: latData.latent_representations,
+    decoder_weights: decoder_weights,
+    image_filenames: imgData.image_filenames
+  };
+
+  latentData = data.latent_representations.map(v => ({ x:v[0], y:v[1] }));
+
+  // --- Plot dataset ---
+  const trace = {
+    x: latentData.map(p => p.x),
+    y: latentData.map(p => p.y),
+    mode: 'markers',
+    type: 'scattergl',
+    marker: { size:5, color:'blue' },
+    name: "dataset"
+  };
+
+  const markerTrace = {
+    x: [],
+    y: [],
+    mode: 'markers',
+    type: 'scattergl',
+    marker: { size:10, color:'red' },
+    name: "selected"
+  };
+
+  const layout = {
+    dragmode: 'pan',
+    hovermode: false,
+    margin: { l:40, r:10, b:40, t:10 },
+    xaxis: { title:"Latent X", zeroline:false },
+    yaxis: { title:"Latent Y", zeroline:false }
+  };
+
+  Plotly.newPlot('plot',[trace, markerTrace],layout,{scrollZoom:true});
+
+  // --- Build decoder ---
+  buildDecoder(data.decoder_weights);
+
+  // listeners del gráfico
+  const plotDiv = document.getElementById('plot');
+  plotDiv.addEventListener("click", evt => {
+    if(moveMode) return;
+    const coords = screenToData(evt, plotDiv);
+    if(coords) updateAndShow(coords.x, coords.y);
+  });
+  plotDiv.addEventListener("mousemove", evt => {
+    if(!moveMode) return;
+    const coords = screenToData(evt, plotDiv);
+    if(coords) updateAndShow(coords.x, coords.y);
+  });
+
+})
+.catch(err => {
+  console.error("Error cargando JSONs:", err);
+  alert("Error al cargar los archivos JSON.");
+});
+
+// --- Funciones ---
+function buildDecoder(weights){
+  decoder = tf.sequential();
+  const layerUnits = weights.map(w => w[1].length);
+  decoder.add(tf.layers.dense({inputShape:[2], units: layerUnits[0], activation:'relu'}));
+  for(let i=1;i<layerUnits.length-1;i++){
+    decoder.add(tf.layers.dense({units: layerUnits[i], activation:'relu'}));
+  }
+  decoder.add(tf.layers.dense({units: layerUnits[layerUnits.length-1], activation:'sigmoid'}));
+
+  for(let i=0;i<decoder.layers.length;i++){
+    const wData = weights[i][0].map(row => row.map(Number));
+    const bData = weights[i][1].map(Number);
+    decoder.layers[i].setWeights([tf.tensor2d(wData), tf.tensor1d(bData)]);
+  }
+}
+
+async function showImage(xVal,yVal){
+  if(!decoder) return;
+  const latentVec = tf.tensor2d([[xVal,yVal]]);
+  let decoded = decoder.predict(latentVec).reshape([imgHeight*imgWidth]);
+  const size = decoded.size;
+
+  let finalImg;
+  if(size===imgWidth*imgHeight){
+    finalImg = decoded.reshape([imgHeight,imgWidth,1]);
+    finalImg = finalImg.concat(finalImg,-1).concat(finalImg,-1);
+  } else if(size===imgWidth*imgHeight*3){
+    finalImg = decoded.reshape([imgHeight,imgWidth,3]);
+  } else { console.error("Tamaño inesperado de salida:",size); return; }
+
+  const tempCanvas = document.createElement("canvas");
+  tempCanvas.width = imgWidth;
+  tempCanvas.height = imgHeight;
+  await tf.browser.toPixels(finalImg,tempCanvas);
+
+  const outCtx = outputCanvas.getContext("2d");
+  outCtx.imageSmoothingEnabled = false;
+  outCtx.clearRect(0,0,outputCanvas.width,outputCanvas.height);
+  outCtx.drawImage(tempCanvas,0,0,outputCanvas.width,outputCanvas.height);
+
+  tf.dispose([latentVec, decoded, finalImg]);
+}
+
+function updateAndShow(xVal,yVal){
+  inputX.value = xVal.toFixed(2);
+  inputY.value = yVal.toFixed(2);
+  showImage(xVal,yVal);
+
+  Plotly.restyle('plot',{x:[[xVal]],y:[[yVal]]},[1]);
+}
+
+function screenToData(evt,plotDiv){
+  const bb = plotDiv.getBoundingClientRect();
+  const xRel = evt.clientX - bb.left;
+  const yRel = evt.clientY - bb.top;
+  const gd = plotDiv._fullLayout;
+  const xaxis = gd.xaxis;
+  const yaxis = gd.yaxis;
+  if(!xaxis || !yaxis) return null;
+  return {x:xaxis.p2l(xRel), y:yaxis.p2l(yRel)};
+}
+
+showBtn.addEventListener('click',()=>{
+  showImage(parseFloat(inputX.value), parseFloat(inputY.value));
+});
+
+toggleMoveBtn.addEventListener('click',()=>{
+  moveMode = !moveMode;
+  toggleMoveBtn.textContent = moveMode ? "🔄 Modo mover: ON" : "🔄 Modo mover: OFF";
+});
+</script>
+
+<footer>
+  <p>© 2025 - Proyecto Redes Neuronales</p>
+  <div class="social-links">
+    <a href="https://twitter.com" target="_blank">Twitter</a> |
+    <a href="https://github.com" target="_blank">GitHub</a> |
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+</body>
+</html>
