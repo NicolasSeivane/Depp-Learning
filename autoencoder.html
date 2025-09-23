@@ -57,9 +57,9 @@ let moveMode = false;
 const latentFile = "latent_representations.json";
 const imageFile = "image_filenames.json";
 const decoderParts = [
-  "decoder_parts/decoder_part1.json",
-  "decoder_parts/decoder_part2.json",
-  "decoder_parts/decoder_part3.json"
+  "decoder_part1.json",
+  "decoder_part2.json",
+  "decoder_part3.json"
   // agregar todos los fragmentos
 ];
 
@@ -130,7 +130,7 @@ Promise.all([
 })
 .catch(err => {
   console.error("Error cargando JSONs:", err);
-  alert("Error al cargar los archivos JSON.");
+  alert("Error al cargar los archivos JSON:\n" + err.message);
 });
 
 // --- Funciones ---

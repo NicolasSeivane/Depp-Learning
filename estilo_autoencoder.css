@@ -259,8 +259,8 @@ p {
 /* 🖼️ Canvas de imagen reconstruida */
 #outputCanvas {
   margin-top: 15px;
-  width: 600px;   /* agrandado */
-  height: 600px;
+  width: 400px;   /* agrandado */
+  height: 400px;
   image-rendering: pixelated;
   border: 2px solid #b0b0b0;
   border-radius: 12px;
