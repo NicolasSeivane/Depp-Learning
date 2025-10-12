@@ -1,0 +1,117 @@
+/* -------------------------------------- */
+/* ESTILOS GLOBALES Y ESTRUCTURA DEL BODY */
+/* -------------------------------------- */
+
+/* Reset básico usando el selector universal (*) */
+* {
+    margin: 0;
+    padding: 0;
+    /* Asegura que padding y border no afecten el width/height total */
+    box-sizing: border-box; 
+}
+
+/* Configuración base del cuerpo (Body) */
+body {
+    background: #0d1f0d; /* Fondo verde oscuro, como en el autoencoder_css [3, 4] */
+    color: #dcdcdc; /* Texto plateado/gris claro [3, 4] */
+    font-family: 'Inter', sans-serif;
+    
+    /* Disposición Flexbox para posicionar el footer al final [3, 4] */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ocupa al menos el 100% de la altura de la ventana [3, 4] */
+}
+
+/* -------------------------------------- */
+/* HEADER (CABECERA) */
+/* -------------------------------------- */
+
+.site-header {
+    background: #162416; /* Fondo oscuro [3, 4] */
+    padding: 15px 0;
+    border-bottom: 1px solid #b0b0b0; /* Borde separador [3, 4] */
+    width: 100%;
+    text-align: center;
+}
+
+.site-header h1 { /* Corresponde a h1.site-header__title */
+    color: #e0e0e0; /* Color claro para el título [5, 6] */
+    margin-bottom: 0;
+    font-size: 2.5rem; /* Uso de unidades relativas [7] */
+}
+
+/* -------------------------------------- */
+/* NAVEGACIÓN (NAV) */
+/* -------------------------------------- */
+
+.main-nav ul { /* Estilo aplicado a ul dentro de nav */
+    list-style: none; /* Elimina las viñetas [8] */
+    display: flex; /* Utiliza Flexbox para disposición horizontal [3, 4] */
+    gap: 20px; /* Espacio entre los elementos [3, 4] */
+    margin: 0;
+    padding: 0;
+    justify-content: center; /* Centra los links del nav [9, 10] */
+}
+
+.main-nav a {
+    color: #b0b0b0; /* Color inicial de los enlaces [3, 4] */
+    text-decoration: none; /* Quita el subrayado [8] */
+    font-weight: bold;
+    padding: 10px 15px; /* Padding para hacer la zona de clic más grande */
+    transition: color 0.3s; /* Transición suave para el efecto hover [4, 5] */
+    display: block;
+}
+
+.main-nav a:hover {
+    color: #ffffff; /* Color blanco al pasar el ratón [4, 5] */
+}
+
+/* -------------------------------------- */
+/* MAIN (CONTENIDO CENTRAL) */
+/* -------------------------------------- */
+
+.site-content {
+    flex: 1; /* Ocupa el espacio restante para empujar el footer hacia abajo [4, 5] */
+    padding: 40px 10%; 
+    /* El contenido central del autoencoder usa text-align: center, lo aplicamos aquí para coherencia [4, 5] */
+    text-align: center; 
+}
+
+.site-content h2 {
+    color: #e0e0e0; /* Color similar al h1 para el contenido */
+    margin-bottom: 20px;
+}
+
+.site-content p {
+    color: #bfbfbf; /* Gris claro para los párrafos [5, 6] */
+    max-width: 800px; /* Limita el ancho del texto para mejor legibilidad */
+    margin: 0 auto 20px;
+}
+
+.site-content a {
+    color: #3498db; /* Un color de contraste (azul) para enlaces */
+}
+
+/* -------------------------------------- */
+/* FOOTER (PIE DE PÁGINA) */
+/* -------------------------------------- */
+
+.site-footer {
+    margin-top: auto; /* Empuja el footer al final de la vista [11, 12] */
+    background: #162416; /* Mismo fondo que el header [11, 12] */
+    padding: 15px 0;
+    text-align: center;
+    border-top: 1px solid #b0b0b0; /* Borde separador superior [11, 12] */
+    color: #b0b0b0;
+    width: 100%;
+}
+
+.site-footer a {
+    color: #b0b0b0; /* Color del enlace en el footer [11, 12] */
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.site-footer a:hover {
+    color: #ffffff;
+}
