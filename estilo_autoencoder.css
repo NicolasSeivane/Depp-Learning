@@ -296,3 +296,149 @@ header nav ul {
   justify-content: center; /* centra los links del nav */
   display: flex;
 }
+
+/* 🌌 Fondo y texto más contrastado */
+body {
+  background: radial-gradient(circle at top, #0e1e0e 0%, #071107 100%);
+  color: #eaeaea;
+}
+
+/* 🔲 Gráfico y panel — mismos tamaños visuales */
+#main {
+  justify-content: center;
+  align-items: flex-start;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+/* 📈 Gráfico */
+#plot {
+  width: 500px;
+  height: 500px;
+  background: #142414;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+  width: 600px;
+}
+
+/* ⚙️ Panel de controles */
+#controls {
+  background: #142414;
+  padding: 30px 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+  text-align: center;
+  min-width: 420px;
+}
+
+/* Inputs y botones */
+#controls input {
+  background: #0f1f0f;
+  color: #ffffff;
+  border: 1px solid #8b8b8b;
+  border-radius: 6px;
+  width: 90px;
+  text-align: center;
+}
+
+#controls button {
+  background: linear-gradient(145deg, #1c3a1c, #295129);
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+#controls button:hover {
+  background: linear-gradient(145deg, #295129, #367636);
+  transform: translateY(-2px);
+}
+
+/* 🖼️ Imagen reconstruida */
+#reconstructionWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#outputCanvas {
+  width: 500px;
+  height: 500px;
+  image-rendering: pixelated;
+  border: 2px solid #b0b0b0;
+  border-radius: 16px;
+  background: #0d1f0d;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  transition: transform 0.3s ease;
+}
+#outputCanvas:hover {
+  transform: scale(1.05);
+}
+
+/* Título imagen reconstruida */
+#controls h3 {
+  margin-top: 20px;
+  color: #ffffff;
+  font-size: 1.3em;
+  text-shadow: 0 0 8px rgba(255,255,255,0.2);
+}
+
+#top-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  
+}
+
+#main {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+#plot, #controls {
+  text-align: center;
+}
+
+#top-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+  padding: 15px 25px;
+  background-color: #162416; /* gris claro */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#top-controls input {
+  width: 80px;
+  padding: 5px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  text-align: center;
+}
+
+#top-controls button {
+  background-color: #17570793;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+#top-controls button:hover {
+    background-color: #005fcc;
+}

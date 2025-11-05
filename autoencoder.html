@@ -18,26 +18,33 @@
     </nav>
   </header>
 
-  <div id="container">
-    <h1>Decodificación de Espacio Latente</h1>
-    <p>
-      Seleccioná un punto en el gráfico o movete libremente para visualizar cómo se reconstruye la imagen.
-    </p>
+<div id="container">
+  <h1>Decodificación de Espacio Latente</h1>
+  <p>
+    Seleccioná un punto en el gráfico o movete libremente para visualizar cómo se reconstruye la imagen.
+  </p>
 
-    <div id="main">
+  <!-- Controles arriba -->
+  <div id="top-controls">
+    X: <input type="number" id="inputX" step="0.01" value="0">
+    Y: <input type="number" id="inputY" step="0.01" value="0">
+    <button id="showBtn">Mostrar Imagen</button>
+    <button id="toggleMoveBtn">🔄 Modo mover: OFF</button>
+  </div>
+
+  <!-- Gráfico e imagen alineados -->
+  <div id="main">
+    <div id="plot-container">
+      <h3>Espacio Latente</h3>
       <div id="plot"></div>
-      <div id="controls">
-        <div>
-          X: <input type="number" id="inputX" step="0.01" value="0"><br>
-          Y: <input type="number" id="inputY" step="0.01" value="0"><br>
-          <button id="showBtn">Mostrar Imagen</button>
-          <button id="toggleMoveBtn">🔄 Modo mover: OFF</button>
-        </div>
-        <h3>Imagen Reconstruida</h3>
-        <canvas id="outputCanvas" width="1500" height="1500"></canvas>
-      </div>
+    </div>
+
+    <div id="image-container">
+      <h3>Imagen Reconstruida</h3>
+      <canvas id="outputCanvas" width="1500" height="1500"></canvas>
     </div>
   </div>
+</div>
 
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.9.0/dist/tf.min.js"></script>
