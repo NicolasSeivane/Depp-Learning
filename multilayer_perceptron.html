@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Multilayer Perceptron - Interactive Playground</title>
+
+  <!-- Plotly + numeric.js -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/numeric/1.2.6/numeric.min.js"></script>
+
+  <!-- MathJax config (v3) -->
+  <script>
+    window.MathJax = {
+      tex: { inlineMath: [['$', '$'], ['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']] },
+      startup: { typeset: false }
+    };
+  </script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/multilayer_perceptron.css">
+</head>
+
+<body>
+  <nav class="main-nav">
+    <ul class="main-nav__list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="autoencoder.html">Autoencoder</a></li>
+      <li><a href="multilayer_perceptron.html" class="active">Multilayer Perceptron</a></li>
+      <li><a href="simple_perceptron.html">Simple Perceptron</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <header class="site-header" style="background:transparent; border:none; padding:10px 0;">
+      <h1>Red Neuronal Multicapa</h1>
+      <p style="color:var(--text-muted)">
+        Visualización del espacio de decisión de una red neuronal multicapa (tanh/lineal).
+        Desarrollado por <b>Nicolás Seivane</b>.
+      </p>
+    </header>
+
+    <div class="content">
+      <!-- LEFT -->
+      <div>
+        <div class="panel controls">
+
+          <!-- Dataset selector (solo aparece si hay más de uno) -->
+          <div class="row" id="dataset_row">
+            <div>
+              <label class="small"><strong>Dataset</strong></label>
+              <select id="dataset_select"></select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label class="small"><strong>Neuronas ocultas</strong></label>
+              <select id="play_neurons">
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label class="small"><strong>Activación</strong></label>
+              <select id="activation_mode">
+                <option value="tanh">tanh()</option>
+                <option value="linear">lineal</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <label class="small"><strong>Visualización</strong></label>
+              <select id="play_mode">
+                <option value="binary">Binaria (sign)</option>
+                <option value="continuous">Continua</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <button id="resetBtn" class="btn">Reset</button>
+            <button id="randomizeBtn" class="ghost">Random</button>
+          </div>
+
+          <div class="neuron-box panel" id="play_neurons_controls"></div>
+          <div class="panel">
+            <div><strong>Pesos de salida</strong></div>
+            <div id="play_output_controls" style="margin-top:10px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="plot-area">
+        <div id="playground-plot" class="panel"></div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;" class="panel">
+      <div style="display:flex;justify-content:space-between;">
+        <div>
+          <strong>Fórmulas</strong>
+          <div style="color:var(--muted);margin-top:6px;">
+            $$h_j=f(w_{1j}x + w_{2j}y + b_j), \quad f=\tanh \text{ o } f=\text{id}$$
+            $$\hat{y}=f\Big(\sum_j w_j^{out} h_j + b^{out}\Big)$$
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:13px;color:var(--muted)">Rango fijo</div>
+          <div style="font-weight:600">x ∈ [-2,6] &nbsp; y ∈ [-2,6]</div>
+        </div>
+      </div>
+      <div class="weights" id="weights_display"></div>
+    </div>
+  </div>
+
+  <script src="js/multilayer_perceptron.js"></script>
+
+</body>
+
+</html>

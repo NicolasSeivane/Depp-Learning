@@ -1,0 +1,132 @@
+/* Global CSS - Unifying the look of the Deep Learning Repository */
+
+:root {
+    --bg-dark: #0d1f0d;
+    --bg-panel: #1c2a1c;
+    --bg-header: #162416;
+    --text-main: #dcdcdc;
+    --text-muted: #bfbfbf;
+    --text-highlight: #e0e0e0;
+    --accent: #3498db;
+    --border-color: #b0b0b0;
+    --radius-main: 12px;
+    --radius-sub: 10px;
+    --font-family: 'Inter', sans-serif;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Navigation System */
+.main-nav {
+    background: var(--bg-header);
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(176, 176, 176, 0.2);
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    transition: color 0.3s, background 0.3s;
+    display: block;
+    border-radius: 6px;
+}
+
+.main-nav a:hover, .main-nav a.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Header & Titles */
+.site-header {
+    background: var(--bg-header);
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+h1, h2, h3 {
+    color: var(--text-highlight);
+    letter-spacing: 0.5px;
+}
+
+/* Common Layout Components */
+.container {
+    max-width: 1100px;
+    margin: 30px auto;
+    background: var(--bg-panel);
+    border-radius: var(--radius-main);
+    box-shadow: var(--shadow);
+    padding: 30px;
+}
+
+.section-desc {
+    max-width: 800px;
+    margin: 10px auto 25px auto;
+    padding: 15px 25px;
+    background-color: var(--bg-header);
+    color: var(--text-muted);
+    border-radius: var(--radius-sub);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* Footer */
+.site-footer {
+    margin-top: auto;
+    background: var(--bg-header);
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+}
+
+.site-footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.2s;
+}
+
+.site-footer a:hover {
+    color: #ffffff;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 5px;
+    }
+}

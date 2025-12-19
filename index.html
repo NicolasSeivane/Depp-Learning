@@ -1,42 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <!-- Vinculación con el archivo CSS externo (styles.css) [1, 2] -->
-  <link rel="stylesheet" href="pagina_princ.css"> 
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+  <title>Deep Learning Exploration - Nicolás Seivane</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-  <header class="site-header">
-    <!-- El h1 es un encabezado principal [7, 8] -->
-    <h1 class="site-header__title">Bienvenidos</h1>
-  </header>
-
   <nav class="main-nav">
-    <!-- Uso de una lista desordenada (<ul>) para la navegación, ideal para barras de menú [9] -->
     <ul class="main-nav__list">
-      <li><a href="./index.html">Home</a></li>
-      <li><a href="./autoencoder.html">Decodificador</a></li>
-      <li><a href="./red_multicapa.html">Multicapa</a></li>
-      <li><a href="./red_simple.html">Simple</a></li>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="autoencoder.html">Autoencoder</a></li>
+      <li><a href="multilayer_perceptron.html">Multilayer Perceptron</a></li>
+      <li><a href="simple_perceptron.html">Simple Perceptron</a></li>
     </ul>
   </nav>
 
+  <header class="site-header">
+    <h1 class="site-header__title">Deep Learning Playground</h1>
+  </header>
+
   <main class="site-content">
-    <!-- Contenido principal de la página [4] -->
-    <h2>Explorando Redes Neuronales</h2>
-    <p>Esta página presenta diferentes arquitecturas de redes neuronales, incluyendo 
-        <a href="./autoencoder.html">autoencoders</a>, redes multicapa y estructuras simples.</p>
+    <div class="container">
+      <h2>Explorando Redes Neuronales</h2>
+      <p>Esta plataforma interactiva permite visualizar el comportamiento de diferentes arquitecturas de redes
+        neuronales, desde el perceptrón más simple hasta autoencoders de espacio latente.</p>
+
+      <div id="theory-section" class="theory-grid">
+        <!-- Theory content will be added here -->
+        <article class="theory-card">
+          <h3>Perceptrón Simple</h3>
+          <p>La unidad básica de una red neuronal. Aprende a separar datos linealmente mediante el ajuste de pesos y un
+            sesgo.</p>
+        </article>
+        <article class="theory-card">
+          <h3>Perceptrón Multicapa (MLP)</h3>
+          <p>Introduce capas ocultas y funciones de activación no lineales (como tanh) para resolver problemas donde los
+            datos no son linealmente separables.</p>
+        </article>
+        <article class="theory-card">
+          <h3>Autoencoders</h3>
+          <p>Redes diseñadas para aprender representaciones eficientes de datos (compresión) y luego reconstruirlos a
+            partir de un espacio latente reducido.</p>
+        </article>
+      </div>
+    </div>
   </main>
-  
+
   <footer class="site-footer">
-    <!-- Enlace a GitHub [10] -->
-    <p class="site-footer__text"><a href="https://github.com/NicolasSeivane">Github</a></p>
+    <p>Desarrollado por Nicolás Seivane</p>
+    <div class="footer-links">
+      <a href="https://github.com/NicolasSeivane">GitHub</a>
+      <a href="https://linkedin.com">LinkedIn</a>
+    </div>
   </footer>
 
 </body>
+
 </html>

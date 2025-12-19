@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Perceptron - Interactive Demo</title>
+  <script src="https://cdn.plot.ly/plotly-2.32.0.min.js"></script>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/simple_perceptron.css">
+</head>
+
+<body>
+  <nav class="main-nav">
+    <ul class="main-nav__list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="autoencoder.html">Autoencoder</a></li>
+      <li><a href="multilayer_perceptron.html">Multilayer Perceptron</a></li>
+      <li><a href="simple_perceptron.html" class="active">Simple Perceptron</a></li>
+    </ul>
+  </nav>
+
+  <div class="container">
+    <h1>Perceptrón Simple Función Escalón</h1>
+    <div class="section-desc">
+      Este gráfico muestra cómo el perceptrón actualiza sus pesos y sesgo en cada iteración para realizar una
+      clasificación binaria.
+      En la pestaña <b>Jugar</b> podés usar el deslizador para ver las actualizaciones paso a paso y observar cómo
+      cambia la recta de separación.
+      <span>— Nicolás Seivane</span>
+    </div>
+    <div class="tab" id="tabButtons"></div>
+    <div id="tabContents"></div>
+    <div class="tabcontent" id="playgroundTab">
+      <h2>Jugar con el hiperplano</h2>
+      <div class="controls">
+        <label>Dataset:
+          <select id="play_dataset">
+            <option value="Dataset1">Dataset 1</option>
+            <option value="Dataset2">Dataset 2</option>
+            <option value="Dataset3">Dataset 3</option>
+            <option value="Dataset4">Dataset 4</option>
+          </select>
+        </label>
+        <label>w₁: <input type="range" id="play_w1" min="-2" max="2" step="0.01" value="1"></label>
+        <label>w₂: <input type="range" id="play_w2" min="-2" max="2" step="0.01" value="1"></label>
+        <label>b: <input type="range" id="play_b" min="-10" max="10" step="0.01" value="0"></label>
+        <label>Vector w:
+          <select id="play_wmode">
+            <option value="normal">Normal a la recta</option>
+            <option value="origen">Desde el origen</option>
+          </select>
+        </label>
+        <span id="play_values"></span>
+      </div>
+      <div id="play_plot" class="plot-container"></div>
+      <div style="margin-top:10px;color:#2d3a6b;">
+        <b>Arrastra los deslizadores para ver cómo cambian el hiperplano y el vector w.</b>
+      </div>
+    </div>
+  </div>
+  <script src="js/simple_perceptron_data.js"></script>
+  <script src="js/simple_perceptron.js"></script>
+</body>
+
+</html>

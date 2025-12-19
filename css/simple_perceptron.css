@@ -1,0 +1,86 @@
+/* Simple Perceptron Specific Styles */
+
+.tab {
+    overflow: hidden;
+    border-bottom: 1px solid #0a0000;
+    display: flex;
+    justify-content: center;
+    background: var(--bg-header);
+    border-radius: 10px 10px 0 0;
+}
+
+.tab button {
+    background-color: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 12px 28px;
+    transition: 0.3s;
+    font-size: 1.05em;
+    color: var(--text-muted);
+    border-radius: 10px 10px 0 0;
+}
+
+.tab button:hover {
+    background-color: #3a4a3a;
+    color: #ffffff;
+}
+
+.tab button.active {
+    background-color: var(--bg-panel);
+    color: var(--text-highlight);
+}
+
+.plot-container {
+    width: 700px;
+    height: 600px;
+    margin: 0 auto 18px auto;
+    border-radius: var(--radius-main);
+    background: var(--bg-panel);
+    box-shadow: var(--shadow);
+}
+
+.controls {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: var(--bg-header);
+    border-radius: var(--radius-sub);
+}
+
+.controls input,
+.controls select {
+    font-size: 0.95em;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(176, 176, 176, 0.2);
+    background: var(--bg-dark);
+    color: #ffffff;
+    text-align: center;
+}
+
+#tabContents .controls button {
+    background: #2a3a2a;
+    color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+#tabContents .controls button:hover {
+    background: #3a4a3a;
+}
+
+@media (max-width: 800px) {
+    .plot-container {
+        width: 95vw;
+        height: 60vw;
+        min-width: 0;
+    }
+}
